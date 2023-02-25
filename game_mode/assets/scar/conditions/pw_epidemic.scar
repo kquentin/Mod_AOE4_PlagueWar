@@ -1,0 +1,110 @@
+PW_EPIDEMIC_MODULE = "PW_Epidemic"
+
+-----------------------------
+-- Data:
+-----------------------------
+
+PW_EPIDEMIC_OBJECTIVE = nil
+PW_EPIDEMIC_OBJECTIVE_COUNTER = 1
+
+PW_EPIDEMIC_OBJECTIVE_DATA = {
+	title = "$7976eec7134b47b8a33bc6419a42d8f2:11", 
+	description = Loc_Empty(),
+	icon = "icons\\objectives\\objectives_battle",
+	data_template = DT_PRIMARY_DEFAULT,
+	priority = OT_Primary,
+	parent = 0,
+	telemetry_title = "epidemicObj",
+}
+
+-----------------------------
+-- Delegates:
+-----------------------------
+
+Core_RegisterModule(PW_EPIDEMIC_MODULE)	
+
+-----------------------------
+-- Callbacks:
+-----------------------------
+
+function PW_Epidemic_OnTimerTick()		
+	local player = PW_GetRandomHumanPlayer()	
+	local player_enemy_id = Player_FindFirstEnemyPlayer(player.id)
+	local player_sgroup_villager = Player_GetSquadsFromType(player.id, PW_BLUEPRINT_VILLAGER)
+	
+	if player_enemy_id == nil then
+		Rule_RemoveAll()
+		return
+	end
+	
+	local roundedGameTime = math.floor(World_GetGameTime()) -- get the largest integer smaller than or equal to World_GetGameTime.
+	if roundedGameTime == PW_GLOBAL_SETTINGS.Difficulty.Value then			
+		local count = PW_GLOBAL_SETTINGS.Difficulty.Count
+		if SGroup_CountSpawned(player_sgroup_villager) > 0 then
+			if SGroup_CountSpawned(player_sgroup_villager) < PW_GLOBAL_SETTINGS.Difficulty.Count then
+				count = SGroup_CountSpawned(player_sgroup_villager)
+			end
+			
+			for i = 1, count do
+				local squad = SGroup_GetRandomSpawnedSquad(player_sgroup_villager)				
+				if squad ~= nil and type(squad) ~= "number" then						
+					SGroup_Remove(player_sgroup_villager, squad) 
+					Entity_ConvertBlueprint(Squad_EntityAt(squad, 0), BP_GetEntityBlueprint(PW_ENTITY_TABLE[Player_GetRaceName(player.id)]["infected"]))
+					Squad_SetPlayerOwner(squad, player_enemy_id)
+				end
+			end
+				
+			PW_EPIDEMIC_OBJECTIVE_COUNTER = PW_EPIDEMIC_OBJECTIVE_COUNTER + 1
+			Obj_SetCounterMax(PW_EPIDEMIC_OBJECTIVE, PW_EPIDEMIC_OBJECTIVE_COUNTER + 1)
+			Obj_SetCounterCount(PW_EPIDEMIC_OBJECTIVE, PW_EPIDEMIC_OBJECTIVE_COUNTER)
+			
+			PW_GLOBAL_SETTINGS.Difficulty.Count = PW_GLOBAL_SETTINGS.Difficulty.Count + PW_GLOBAL_SETTINGS.Difficulty.Increment	
+		end
+		
+		PW_GLOBAL_SETTINGS.Difficulty.Value = roundedGameTime + World_GetRand(PW_GLOBAL_SETTINGS.Difficulty.Value / 2, PW_GLOBAL_SETTINGS.Difficulty.Value)
+	end
+end
+
+function PW_Epidemic_OnDamageReceived(context)	
+	if context == nil 
+		or context.victimOwner == nil
+		or context.victimSquad == nil
+		or context.attackerOwner == nil then
+		return
+	end
+
+	local victim_owner = Core_GetPlayersTableEntry(context.victimOwner)
+	local attacker_owner = Core_GetPlayersTableEntry(context.attackerOwner)
+
+	if victim_owner == nil or attacker_owner == nil or context.isRepairing then
+		return
+	end
+
+	if AI_IsAIPlayer(victim_owner.id) or not Squad_IsOfType(context.victimSquad, PW_BLUEPRINT_VILLAGER) then	
+		return
+	end
+	
+	Entity_ConvertBlueprint(Squad_EntityAt(context.victimSquad, 0), BP_GetEntityBlueprint(PW_ENTITY_TABLE[Player_GetRaceName(victim_owner.id)]["infected"]))
+	Squad_SetPlayerOwner(context.victimSquad, attacker_owner.id)
+end
+
+-----------------------------
+-- Functions:
+-----------------------------
+
+function PW_Epidemic_OnStart()
+	print("PW_Epidemic_OnStart")
+	Rule_AddInterval(PW_Epidemic_OnTimerTick, 1.0)
+	
+	if PW_EPIDEMIC_OBJECTIVE == nil then
+		PW_EPIDEMIC_OBJECTIVE = PW_Objectives_Create(PW_EPIDEMIC_OBJECTIVE_DATA, Core_GetPlayersTableEntry(Game_GetLocalPlayer()), "EpidemicObjectiveTemplate", 0)
+		Obj_SetVisible(PW_EPIDEMIC_OBJECTIVE, true)
+		Obj_SetCounterType(PW_EPIDEMIC_OBJECTIVE, COUNTER_CountUpTo)	
+		Obj_SetCounterMax(PW_EPIDEMIC_OBJECTIVE, PW_EPIDEMIC_OBJECTIVE_COUNTER)
+	end
+end
+
+function PW_Epidemic_OnPlay()
+	print("PW_Epidemic_OnDamageReceived")
+	Rule_AddGlobalEvent(PW_Epidemic_OnDamageReceived, GE_DamageReceived)
+end

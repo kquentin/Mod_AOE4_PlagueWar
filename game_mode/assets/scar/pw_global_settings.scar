@@ -1,0 +1,87 @@
+-----------------------------
+-- Constants:
+-----------------------------
+
+PW_GLOBAL_SETTINGS_LOCAL_PLAYER = nil
+PW_GLOBAL_SETTINGS_MODULE = "PW_GlobalSettings"
+
+-- Difficulties
+PW_GLOBAL_SETTINGS_DIFFICULTY_EASY_COUNT = 1
+PW_GLOBAL_SETTINGS_DIFFICULTY_EASY_INCREMENT = 1
+PW_GLOBAL_SETTINGS_DIFFICULTY_EASY_VALUE = 300 		-- 5 minutes
+
+PW_GLOBAL_SETTINGS_DIFFICULTY_NORMAL_COUNT = 1
+PW_GLOBAL_SETTINGS_DIFFICULTY_NORMAL_INCREMENT = 2
+PW_GLOBAL_SETTINGS_DIFFICULTY_NORMAL_VALUE = 240 	-- 4 minutes
+
+PW_GLOBAL_SETTINGS_DIFFICULTY_HARD_COUNT = 1
+PW_GLOBAL_SETTINGS_DIFFICULTY_HARD_INCREMENT = 2
+PW_GLOBAL_SETTINGS_DIFFICULTY_HARD_VALUE = 180 		-- 3 minutes
+
+PW_GLOBAL_SETTINGS_DIFFICULTY_DEVELOPMENT_COUNT = 1
+PW_GLOBAL_SETTINGS_DIFFICULTY_DEVELOPMENT_INCREMENT = 0
+PW_GLOBAL_SETTINGS_DIFFICULTY_DEVELOPMENT_VALUE = 10
+
+-- Dynamics
+PW_GLOBAL_SETTINGS = {
+	Difficulty = {
+		Count = PW_GLOBAL_SETTINGS_DIFFICULTY_NORMAL_COUNT,
+		Increment = PW_GLOBAL_SETTINGS_DIFFICULTY_NORMAL_INCREMENT,
+		Value = PW_GLOBAL_SETTINGS_DIFFICULTY_NORMAL_VALUE
+	}
+}
+
+-----------------------------
+-- Delegates:
+-----------------------------
+
+Core_RegisterModule(PW_GLOBAL_SETTINGS_MODULE)	
+
+-----------------------------
+-- Functions:
+-----------------------------
+
+function PW_GlobalSettings_SetupSettings(options)	
+	print("PW_GlobalSettings_SetupSettings")
+	-- Options can not be null.
+	if not options then
+		return
+	end
+	
+	if options.section_game_settings then
+		PW_GlobalSettings_DefineDifficulty(options.section_game_settings)
+	end
+end
+
+function PW_GlobalSettings_DefineDifficulty(category)
+	if category.option_game_setting_difficulty_level ~= nil then
+		PW_GlobalSettings_SetDifficultyLevel(category.option_game_setting_difficulty_level)
+	end
+end
+
+-----------------------------
+-- Assignment Functions:
+-----------------------------
+
+function PW_GlobalSettings_SetDifficultyLevel(difficulty_level)
+	if difficulty_level.enum_value == difficulty_level.enum_items.difficulty_level_easy then
+		PW_GLOBAL_SETTINGS.Difficulty.Count = PW_GLOBAL_SETTINGS_DIFFICULTY_EASY_COUNT
+		PW_GLOBAL_SETTINGS.Difficulty.Increment = PW_GLOBAL_SETTINGS_DIFFICULTY_EASY_INCREMENT
+		PW_GLOBAL_SETTINGS.Difficulty.Value = PW_GLOBAL_SETTINGS_DIFFICULTY_EASY_VALUE
+		
+	elseif difficulty_level.enum_value == difficulty_level.enum_items.difficulty_level_normal then
+		PW_GLOBAL_SETTINGS.Difficulty.Count = PW_GLOBAL_SETTINGS_DIFFICULTY_NORMAL_COUNT
+		PW_GLOBAL_SETTINGS.Difficulty.Increment = PW_GLOBAL_SETTINGS_DIFFICULTY_NORMAL_INCREMENT
+		PW_GLOBAL_SETTINGS.Difficulty.Value = PW_GLOBAL_SETTINGS_DIFFICULTY_NORMAL_VALUE
+		
+	elseif difficulty_level.enum_value == difficulty_level.enum_items.difficulty_level_hard then
+		PW_GLOBAL_SETTINGS.Difficulty.Count = PW_GLOBAL_SETTINGS_DIFFICULTY_HARD_COUNT
+		PW_GLOBAL_SETTINGS.Difficulty.Increment = PW_GLOBAL_SETTINGS_DIFFICULTY_HARD_INCREMENT
+		PW_GLOBAL_SETTINGS.Difficulty.Value = PW_GLOBAL_SETTINGS_DIFFICULTY_HARD_VALUE
+		
+	elseif difficulty_level.enum_value == difficulty_level.enum_items.difficulty_level_development then
+		PW_GLOBAL_SETTINGS.Difficulty.Count = PW_GLOBAL_SETTINGS_DIFFICULTY_DEVELOPMENT_COUNT
+		PW_GLOBAL_SETTINGS.Difficulty.Increment = PW_GLOBAL_SETTINGS_DIFFICULTY_DEVELOPMENT_INCREMENT
+		PW_GLOBAL_SETTINGS.Difficulty.Value = PW_GLOBAL_SETTINGS_DIFFICULTY_DEVELOPMENT_VALUE
+	end
+end

@@ -1,0 +1,35 @@
+PW_AI_MODULE = "PW_AI"
+
+-----------------------------
+-- Delegates:
+-----------------------------
+
+Core_RegisterModule(PW_AI_MODULE)	
+
+-----------------------------
+-- Functions:
+-----------------------------
+
+function PW_AI_OnPlay()
+	print("PW_AI_OnPlay")
+	for _, player in pairs(PLAYERS) do
+		if AI_IsAIPlayer(player.id) then
+			PW_AI_ApplyAdjustments(player.id)
+		end
+	end
+end
+
+function PW_AI_ApplyAdjustments(player_id)
+	Player_SetResource(player_id, RT_Food, 0)
+	Player_SetResource(player_id, RT_Wood, 0)		
+	Player_SetResource(player_id, RT_Gold, 0)		
+	Player_SetResource(player_id, RT_Stone, 0)
+
+	Player_GetAll(player_id) -- Player_GetAll defaults using sg_allsquads and eg_allentities for OPT_sgroup and OPT_egroup.
+	SGroup_DestroyAllSquads(sg_allsquads) 
+	Entity_SetInvulnerable(
+		EGroup_GetEntityAt(eg_allentities, 1), 
+		true, 
+		0 -- zero time for reset_time means the buff will last forever.
+	)
+end

@@ -1,0 +1,89 @@
+<instance version="4" description="Infected Abbasid villager" template="ebps">
+	<list name="extensions" removedIds="163824703, -138597253">
+		<template_reference name="exts" value="ebpextensions\entity_blueprint_ext" List.ItemID="847857005" List.ParentItemID="847857005">
+			<bool name="browsable_in_editor" value="True" overrideParent="True" />
+		</template_reference>
+		<template_reference name="exts" value="ebpextensions\ability_ext" List.ItemID="-943554142" List.ParentItemID="-943554142">
+			<list name="abilities" overrideParent="True">
+				<instance_reference name="ability" value="abilities\always_on_abilities\abbasid\immune_to_conversion_abb" List.ItemID="1139492318" />
+			</list>
+		</template_reference>
+		<template_reference name="exts" value="ebpextensions\action_tree_ext" List.ItemID="783699706" List.ParentItemID="783699706">
+			<state_tree_node name="ActionTree_OpeningBranch" value="unit_entity" overrideParent="True" />
+		</template_reference>
+		<template_reference name="exts" value="ebpextensions\health_ext" List.ItemID="440395020" List.ParentItemID="440395020">
+			<float name="hitpoints" value="400" overrideParent="True" />
+		</template_reference>
+		<template_reference name="exts" value="ebpextensions\population_ext" List.ItemID="1610633927" List.ParentItemID="1610633927">
+			<float name="personnel_pop" value="0" overrideParent="True" />
+		</template_reference>
+		<template_reference name="exts" value="ebpextensions\sight_ext" List.ItemID="778234458" List.ParentItemID="778234458">
+			<group name="sight_package">
+				<float name="inner_height" value="501" overrideParent="True" />
+				<float name="inner_radius" value="12" overrideParent="True" />
+				<float name="outer_radius" value="41" overrideParent="True" />
+			</group>
+		</template_reference>
+		<template_reference name="exts" value="ebpextensions\type_ext" List.ItemID="125879439" List.ParentItemID="125879439">
+			<list name="unit_type_list" overrideParent="True">
+				<enum name="unit_type" value="human" List.ItemID="-1901158934" />
+				<enum name="unit_type" value="formational" List.ItemID="717461077" />
+				<enum name="unit_type" value="annihilation_condition" List.ItemID="-1057334624" />
+				<enum name="unit_type" value="infantry" List.ItemID="-861971930" />
+				<enum name="unit_type" value="melee" List.ItemID="-1423732981" />
+				<enum name="unit_type" value="light_melee_infantry" List.ItemID="-328979205" />
+				<enum name="unit_type" value="torch_thrower" List.ItemID="2055814665" />
+				<enum name="unit_type" value="military" List.ItemID="-257391109" />
+			</list>
+			<list name="race_type_list" overrideParent="True">
+				<instance_reference name="race_type" value="racebps\abbasid" List.ItemID="209601603" />
+			</list>
+			<list name="attack_target_restriction_on_victim" removedIds="-708445791">
+			</list>
+		</template_reference>
+		<template_reference name="exts" value="ebpextensions\combat_ext" List.ItemID="666654805" List.ParentItemID="666654805">
+			<list name="hardpoints">
+				<group name="hardpoint" List.ItemID="-1967166760" List.ParentItemID="-1967166760">
+					<list name="weapon_table" removedIds="-286663296, -312329078, 913826692">
+						<group name="weapon" List.ItemID="1996562483" List.ParentItemID="1996562483">
+							<template_reference name="weapon_entity_attachment" value="" overrideParent="True">
+							</template_reference>
+							<template_reference name="non_entity_weapon_wrapper" value="non_entity_weapon_wrapper" overrideParent="True">
+								<instance_reference name="non_entity_weapon_wrapper_pbg" value="weapon\races\common\melee\weapon_villager_1" overrideParent="True" />
+								<instance_reference name="animator_attachments" value="attachments\attachment_lists\races\core\weapons\wpn_ebps_template" overrideParent="True" />
+								<string name="marker_name_parent" value="MetaRig_RArmPalmSocket" overrideParent="True" />
+							</template_reference>
+						</group>
+						<group name="weapon" List.ItemID="1647590157" List.ParentItemID="1647590157">
+							<template_reference name="weapon_entity_attachment" value="" overrideParent="True">
+							</template_reference>
+							<template_reference name="non_entity_weapon_wrapper" value="non_entity_weapon_wrapper" overrideParent="True">
+								<instance_reference name="non_entity_weapon_wrapper_pbg" value="weapon\races\common\ranged\weapon_torch_weak" overrideParent="True" />
+								<instance_reference name="animator_attachments" value="attachments\attachment_lists\races\abbasid\weapons\wpn_siege_torch_weak_abb" overrideParent="True" />
+								<string name="marker_name_parent" value="MetaRig_RArmPalmSocket" overrideParent="True" />
+							</template_reference>
+						</group>
+					</list>
+				</group>
+			</list>
+			<group name="idle_targeting">
+				<float name="idle_priority_per_angle_degree" value="-0.5" overrideParent="True" />
+				<float name="idle_targeting_range" value="13" overrideParent="True" />
+			</group>
+			<float name="scan_interval_cached_target_invalid" value="0.5" overrideParent="True" />
+		</template_reference>
+		<template_reference name="exts" value="ebpextensions\moving_ext" List.ItemID="1666359935" List.ParentItemID="1666359935">
+			<enum_table name="speed_scaling_table">
+				<float name="default_speed" value="7.5" overrideParent="True" />
+			</enum_table>
+		</template_reference>
+		<template_reference name="exts" value="ebpextensions\holdable_ext" List.ItemID="-1623318513" List.ParentItemID="-1623318513">
+			<enum name="holdable" value="hold_infantry_ranged" overrideParent="True" />
+		</template_reference>
+		<template_reference name="exts" value="ebpextensions\animation_action_tree_ext" List.ItemID="2051648697" List.ParentItemID="2051648697">
+			<state_tree_node name="ActionTree_OpeningBranch" value="infantery" overrideParent="True" />
+		</template_reference>
+	</list>
+	<uniqueid name="pbgid" value="1073741823" />
+	<instance_reference name="parent_pbg" value="ebps\races\core\units\unit_villager_1" />
+</instance>

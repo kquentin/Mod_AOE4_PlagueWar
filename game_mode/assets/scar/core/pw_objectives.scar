@@ -1,0 +1,17 @@
+-----------------------------
+-- Functions:
+-----------------------------
+
+function PW_Objectives_Create(objective_data, player, template, parent)
+	return Obj_Create(
+		player.id,
+		objective_data.title,
+		objective_data.description, 	
+		objective_data.icon, 
+		template, 
+		player.raceName, 
+		objective_data.priority, 
+		parent, 
+		objective_data.telemetry_title
+	)	
+end

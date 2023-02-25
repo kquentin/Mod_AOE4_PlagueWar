@@ -1,0 +1,52 @@
+PW_CARDINAL_MODULE = "PW_Cardinal"
+
+-----------------------------
+-- Imports
+-----------------------------
+
+-- Required
+import("cardinal.scar")
+
+-- Settings
+import("pw_global_settings.scar")
+
+-- Helpers
+import("helpers/pw_blueprints.scar")
+import("helpers/pw_players.scar")
+
+-- Core
+import("core/pw_objectives.scar")
+
+-- Conditions
+import("conditions/pw_epidemic.scar")
+
+-- AI
+import("ai/pw_ai.scar")
+
+-----------------------------
+-- Delegates
+-----------------------------
+
+Core_RegisterModule(PW_CARDINAL_MODULE)	
+
+-- Called during load as part of the game setup sequence.
+function PW_Cardinal_OnGameSetup()
+	print("PW_Cardinal_OnGameSetup")
+	local options = {}
+	Setup_GetWinConditionOptions(options)
+	--
+	Core_CallDelegateFunctions("SetupSettings", options)
+end
+
+-- Called on match initialization before handing control to the player.
+function PW_Cardinal_OnInit()
+	print("PW_Cardinal_OnInit")
+	FOW_RevealAll()
+end
+
+-- Called after initialization is done when game is fading up from black.
+function PW_Cardinal_Start()
+	print("PW_Cardinal_Start")
+	Core_CallDelegateFunctions("OnStart")
+	Core_CallDelegateFunctions("OnPlay")
+end

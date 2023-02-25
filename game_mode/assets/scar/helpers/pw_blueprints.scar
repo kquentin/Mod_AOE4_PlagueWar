@@ -1,0 +1,38 @@
+-----------------------------
+-- Constants:
+-----------------------------
+
+PW_BLUEPRINT_VILLAGER = "villager"
+
+PW_ENTITY_TABLE = {
+	english = {
+		infected = "0b5644d50fa74a048f83407a70ad4e93:unit_infected_abb"
+	},
+	chinese = {
+		infected = "0b5644d50fa74a048f83407a70ad4e93:unit_infected_abb"
+	},
+	french = {
+		infected = "0b5644d50fa74a048f83407a70ad4e93:unit_infected_abb"
+	},
+	hre = {
+		infected = "0b5644d50fa74a048f83407a70ad4e93:unit_infected_abb"
+	},
+	rus = {	
+		infected = "0b5644d50fa74a048f83407a70ad4e93:unit_infected_abb"
+	},
+	abbasid = {
+		infected = "0b5644d50fa74a048f83407a70ad4e93:unit_infected_abb"
+	},
+	mongol = {
+		infected = "0b5644d50fa74a048f83407a70ad4e93:unit_infected_abb"
+	},
+	sultanate = {
+		infected = "0b5644d50fa74a048f83407a70ad4e93:unit_infected_abb"
+	},
+	malian = {
+		infected = "0b5644d50fa74a048f83407a70ad4e93:unit_infected_abb"
+	},
+	ottoman = {
+		infected = "0b5644d50fa74a048f83407a70ad4e93:unit_infected_abb"
+	}
+}

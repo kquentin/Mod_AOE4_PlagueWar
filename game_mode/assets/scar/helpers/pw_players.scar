@@ -1,0 +1,12 @@
+-----------------------------
+-- Functions:
+-----------------------------
+
+function PW_GetRandomHumanPlayer()
+	-- `pairs` already working randomly in LUA
+	for _, player in pairs(PLAYERS) do
+		if Player_IsHuman(player.id) and Player_IsAlive(player.id) then 
+			return player
+		end
+	end
+end

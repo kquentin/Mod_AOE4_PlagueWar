@@ -1,0 +1,62 @@
+<instance version="4" description="Infected Abbasid villager" template="sbps">
+	<list name="extensions" removedIds="851310113, 1501469924">
+		<template_reference name="squadexts" value="sbpextensions\squad_blueprint_ext" List.ItemID="-2056667985" List.ParentItemID="-2056667985">
+			<bool name="browsable_in_editor" value="True" overrideParent="True" />
+		</template_reference>
+		<template_reference name="squadexts" value="sbpextensions\squad_ui_ext" List.ItemID="443384137" List.ParentItemID="443384137">
+			<list name="race_list">
+				<group name="race_data" List.ItemID="422230052" List.ParentItemID="422230052">
+					<group name="info">
+						<file name="icon_name" value="races\abbasid\units\villager" overrideParent="True" />
+						<locstring name="extra_text" value="6" mod="0b5644d50fa74a048f83407a70ad4e93" overrideParent="True" />
+						<locstring name="help_text" value="4" mod="0b5644d50fa74a048f83407a70ad4e93" comment="If editing this string, please ensure all Civs get relevant changes. The Mongol, English, and Rus (as of Feb 2020) have different text." overrideParent="True" />
+						<locstring name="screen_name" value="8" mod="0b5644d50fa74a048f83407a70ad4e93" overrideParent="True" />
+						<string name="selection_group" value="infected" overrideParent="True" />
+						<string name="selection_datatemplate" value="MilitaryUnitSelectionDataTemplate" overrideParent="True" />
+					</group>
+				</group>
+			</list>
+		</template_reference>
+		<template_reference name="squadexts" value="sbpextensions\squad_loadout_ext" overrideParent="True" List.ItemID="1426203860" List.ParentItemID="1426203860">
+			<list name="unit_list">
+				<group name="loadout_data" List.ItemID="-1737626445">
+					<float name="num" value="1" />
+					<instance_reference name="type" value="ebps\races\abbasid\units\unit_villager_1_abb" overrideParent="True" />
+					<list name="unit_attachments">
+					</list>
+					<bool name="is_default_unit" value="True" />
+				</group>
+			</list>
+			<float name="squad_female_chance" value="0" />
+		</template_reference>
+		<template_reference name="squadexts" value="sbpextensions\squad_ability_ext" List.ItemID="-634721594" List.ParentItemID="-634721594">
+			<list name="abilities" overrideParent="True">
+				<instance_reference name="ability" value="abilities\timed_abilities\civ_core\core_unit_death" List.ItemID="-2008955059" />
+				<instance_reference name="ability" value="abilities\toggle_abilities\civ_core\core_formation_line" List.ItemID="95408930" />
+				<instance_reference name="ability" value="abilities\toggle_abilities\civ_core\core_formation_spread" List.ItemID="1209066799" />
+				<instance_reference name="ability" value="abilities\toggle_abilities\civ_core\core_formation_wedge" List.ItemID="554896484" />
+			</list>
+		</template_reference>
+		<template_reference name="squadexts" value="sbpextensions\squad_type_ext" List.ItemID="891874315" List.ParentItemID="891874315">
+			<list name="squad_race_type_list" overrideParent="True">
+				<instance_reference name="squad_race_type" value="racebps\abbasid" overrideParent="True" List.ItemID="-919532751" />
+			</list>
+			<list name="squad_type_list" removedIds="339225496, -164548402, -375146241, 2103509653">
+				<enum name="squad_type" value="infantry" overrideParent="True" List.ItemID="2132882202" List.ParentItemID="2132882202" />
+				<enum name="squad_type" value="military" List.ItemID="-1494978872" List.ListAction="Append" />
+				<enum name="squad_type" value="melee" List.ItemID="-1317303564" List.ListAction="Append" />
+				<enum name="squad_type" value="scar_military" List.ItemID="1008381844" List.ListAction="Append" />
+				<enum name="squad_type" value="scar_spearman" List.ItemID="-1812007423" List.ListAction="Append" />
+			</list>
+		</template_reference>
+		<template_reference name="squadexts" value="sbpextensions\squad_formation_group_ext" List.ItemID="529555986" List.ParentItemID="529555986">
+			<instance_reference name="default_formation_group_spot_generator" value="formation_group_spot_generator\land\non_formation_land_box_fill_spot_generator" overrideParent="True" />
+		</template_reference>
+		<template_reference name="squadexts" value="sbpextensions\squad_targeting_system_ext" List.ItemID="-1591320452" List.ListAction="Append">
+			<bool name="allow_squad_scan_close_enemies" value="False" />
+			<int name="history_size" value="2" />
+		</template_reference>
+	</list>
+	<uniqueid name="pbgid" value="1073741824" />
+	<instance_reference name="parent_pbg" value="sbps\races\core\unit_villager_1" />
+</instance>
