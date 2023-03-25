@@ -1,6 +1,6 @@
 ﻿ID,Pipeline,PipelineStage,Notes,TranslationNotes,Tags,Text
 1,,,Mod name.,,,Plague War TP
-2,,,Mod description.,,,.
+2,,,Mod description.,,,Requires the Plague War mod.
 3,,,help_text,,,GrRrRrrRRR
 4,,,help_text,,,GRrrRrRRrrrRRRr
 5,,,extra_text,,,Infected
