@@ -15,7 +15,7 @@
 		<DataProperty Name="m_playerUpgrades" Type="Object"/>
 		<DataProperty Name="m_feIcon" Type="String" Value="icons\common\orders\scuttle"/>
 		<DataProperty Name="m_scarMissionFile" Type="String" Value=""/>
-		<DataProperty Name="m_feImageSelected" Type="String" Value=""/>
+		<DataProperty Name="m_feImageSelected" Type="String" Value="icons\common\orders\scuttle"/>
 		<DataProperty Name="m_feDescriptionTooltip" Type="Object">
 			<DataValue Name="util::ReflectLocString">5744826228018411056</DataValue>
 			<!--WinCondition/util::ReflectLocString/-->
@@ -250,7 +250,7 @@
 		<DataProperty Name="m_devOnly" Type="Bool" Value="false"/>
 		<DataProperty Name="m_egroupNamePrefixDestroyList" Type="String"/>
 		<DataProperty Name="m_permittedInventoryItemCategories" Type="String"/>
-		<DataProperty Name="m_feImageUnselected" Type="String" Value=""/>
+		<DataProperty Name="m_feImageUnselected" Type="String" Value="icons\common\orders\scuttle"/>
 	</DataObject>
 </DataWarehouse>
 
